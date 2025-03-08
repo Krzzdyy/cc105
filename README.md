@@ -19,8 +19,8 @@ pip install django
 
 ## 4. Create a Django Project
 ```sh
-django-admin startproject Student_management
-cd Student_management
+django-admin startproject tutor
+cd tutor
 ```
 
 ## 5. Run the Development Server
@@ -30,7 +30,7 @@ python manage.py runserver
 
 ## 6. Create a Django App
 ```sh
-python manage.py startapp students
+python manage.py startapp student_management_sys
 ```
 
 ## 7. Configure Installed Apps
@@ -38,13 +38,13 @@ Open `app_name/apps.py` and copy the class name:
 ```python
 class AppNameConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'students'
+    name = 'student_management_sys'
 ```
 Add the students to `INSTALLED_APPS` in `Student_management/settings.py`:
 ```python
 INSTALLED_APPS = [
     ...
-    'students',
+    'student_management_sys.apps.StudentManagementSysConfig',
 ]
 ```
 
@@ -57,7 +57,7 @@ In `settings.py`, update the `DIRS` setting:
 ```
 
 ## 9. Set Up URLs
-Inside `students`, create a new file `urls.py` and add:
+Inside `student_management_sys`, create a new file `urls.py` and add:
 ```python
 from django.urls import path
 from . import views
@@ -67,14 +67,14 @@ urlpatterns = [
 ]
 ```
 
-Update `Student_management/urls.py`:
+Update `tutor/urls.py`:
 ```python
 from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('app_name/', include('app_name.urls')),
+    path('student_management_sys/', include('student_management_sys.urls')),
 ]
 ```
 
@@ -88,7 +88,7 @@ urlpatterns = [
    DATABASES = {
        'default': {
            'ENGINE': 'django.db.backends.mysql',
-           'NAME': 'Student_management',
+           'NAME': 'sms',
            'USER': 'root',  
            'PASSWORD': '',
            'HOST': 'localhost',
